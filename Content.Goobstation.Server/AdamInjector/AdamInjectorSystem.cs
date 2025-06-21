@@ -13,6 +13,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.AdamInjector;
 
@@ -54,6 +55,13 @@ public sealed class AdamInjectorSystem : EntitySystem
             !_mobState.IsDead(args.Target.Value, mobState))
         {
             _popup.PopupEntity(Loc.GetString("adam-injector-target-not-dead"), uid, args.User);
+            return;
+        }
+
+        // Check if target is a player (prevent usage on players)
+        if (HasComp<ActorComponent>(args.Target.Value))
+        {
+            _popup.PopupEntity(Loc.GetString("adam-injector-target-player"), uid, args.User);
             return;
         }
 
