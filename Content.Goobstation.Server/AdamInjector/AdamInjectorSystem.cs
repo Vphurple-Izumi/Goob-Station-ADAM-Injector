@@ -10,6 +10,7 @@ using Content.Shared.Damage;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -58,8 +59,8 @@ public sealed class AdamInjectorSystem : EntitySystem
             return;
         }
 
-        // Check if target is a player (prevent usage on players)
-        if (HasComp<ActorComponent>(args.Target.Value))
+        // Check if target has a mind (is a player) - only allow on NPCs (no mind)
+        if (TryComp<MindContainerComponent>(args.Target.Value, out var mindContainer) && mindContainer.HasMind)
         {
             _popup.PopupEntity(Loc.GetString("adam-injector-target-player"), uid, args.User);
             return;
