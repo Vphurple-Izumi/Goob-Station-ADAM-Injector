@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseItem
+  id: AdamInjector
+  name: ADAM injector
+  description: A mysterious injector containing ADAM. Its purpose is unclear.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _Goobstation/Objects/Specific/Medical/adam_injector.rsi
+    scale: 0.72, 0.72
+    layers:
+    - state: Full
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    changeColor: false
+    emptySpriteName: Empty
+  - type: StaticPrice
+    price: 100
+  - type: AdamInjector
